@@ -17,7 +17,7 @@ With this dataset, I can compare top players by statistics, and show which teams
 This is The Movie Database (tmdb), which describes over 5000 movies using a variety of information, like the title, genre, director, average rating, budget, revenue. Using the information in this dataset, I could use hypothesis testing to show that Martin Scorcese is statistically more popular and higher rated than Quentin Tarantino, or possibly that action comedies are more popular than horror.
 
 # Dataset 3
-[Video Game Data]
+[Video Game Data](https://www.kaggle.com/juttugarakesh/video-game-data)
 
 ## Proposal 3
 This dataset describes Video Game sales across mulitple different countries, publishers, and decades. With information on sales data by country, I can compare the popularity of Sega in Japan versus the US (as well as Nintendo). Using hypothesis testing, I could prove (or fail to prove) that Mario is more popular than Sonic. I could also prove (or fail to prove) that ET was the worst game of all time.
