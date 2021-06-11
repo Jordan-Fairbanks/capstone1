@@ -67,8 +67,11 @@ for stat, ax in zip(selection[1:], axs.flatten()):
     ax.set_ylim(selected_season_stats_by_year[stat].max() *.1,selected_season_stats_by_year[stat].max()*1.2)
     
     ax.legend()
+# add title to figure     
 fig.suptitle('Average Player Statistics Over the Years', fontsize=20,weight='bold')
 fig.tight_layout()
+
+# save file
 plt.savefig('mean_stats_by_year.png')
 
 
@@ -76,6 +79,7 @@ plt.savefig('mean_stats_by_year.png')
 # it's meant to show how much the definition of a 'good shooter' has changed
 new_key_stats = ['Player', '3PA', '3P%','2PA', '2P%', 'FTA','FT%']
 
+# select stats from Steph Curry's 2017 season and Brian Taylor's 1981 season
 steph = season_stats[(season_stats['Player'] == 'Stephen Curry') & (season_stats.Year == 2017)][new_key_stats]
 brian = season_stats[(season_stats['Player'] == 'Brian Taylor')&(season_stats['Year'] == 1981)][new_key_stats]
 
@@ -83,18 +87,24 @@ fig, axs = plt.subplots(1, 3, figsize=(10, 4))
 percents = ['3P%','2P%','FT%']
 attempts = ['3PA','2PA','FTA']
 for attempt, percentage, ax in zip(attempts, percents, axs.flatten()):
-        
+    
+    # set up a beta distribution to more accurately represent each player's true shot percentage/probability
     sa, sb = float(steph[percentage]*steph[attempt] +1), float(steph[attempt]-(steph[percentage]*steph[attempt])+1)
     ba, bb = float(brian[percentage]*brian[attempt]+ 1), float(brian[attempt]-(brian[percentage]*brian[attempt])+1)
     sbeta = stats.beta(sa, sb)
     bbeta = stats.beta(ba,bb)
+    
+    # set up basic plots
     x = np.linspace(0.0, 1.0, 301)
     ax.plot(x, sbeta.pdf(x), label='Steph Curry')
     ax.plot(x, bbeta.pdf(x), label='Brian Taylor')
     ax.set_title(f'{codes[attempt][:-9]}')
+    
+    # plot a dotted vertical line at the mean of each distribution
     ax.axvline(sbeta.ppf(.5), alpha=.6,linestyle='--', color='k', label='mean')
     ax.axvline(bbeta.ppf(.5),alpha=.6, linestyle='--', color='k')
     
+    # axis labels
     ax.set_xlabel('Success Rate')
     ax.set_ylabel('Probability')
     
@@ -117,17 +127,21 @@ for attempt, percentage, ax in zip(attempts, percents, axs.flatten()):
     
     ax.legend()
 
+# add title to figure
 fig.suptitle('Steph Curry\nVs\nBrian Taylor(3 Point Shooting Leader 1981)', fontsize=14, weight='bold')
 plt.tight_layout()
+
+# save file
 plt.savefig('Steph_versus_Brian.png')
 
 # hypothesis testing
-# h0 = the three point rule in 1979 didn't impact the  is played
+# h0 = the three point rule in 1979 didn't impact each statistic being measured
 # hA = the three point rule changed how the game is played and which statistics 
 # athletes focus on during practice
 
+# selection of stats to focus on
 top_ten_stats = ['Player','Year','3PA','3P%','2PA','2P%','AST','BLK','STL','TRB','TOV','FTA','PTS', 'PER']
-pvalues = []
+
 
 # separate years to compare
 newest = season_stats[season_stats.Year == 2017.0]
@@ -136,7 +150,7 @@ oldest = season_stats[season_stats.Year == 1980]
 fig, axs = plt.subplots(3,4, figsize=(20,15))
 
 for stat, ax in zip(top_ten_stats[2:], axs.flatten()):
-    # create distributions and a range
+    # create normal distributions based on  and a range
     x = np.linspace(min(newest[stat].min(),oldest[stat].min()),
                     max(newest[stat].max(), oldest[stat].max()),
                     300)
@@ -171,10 +185,12 @@ for stat, ax in zip(top_ten_stats[2:], axs.flatten()):
     ax.title.set_weight('bold')
     ax.grid('on', alpha=.3)
     ax.legend()
-    
-fig.suptitle('Average League Statistics\n2017 vs 1980\n(Mann Whitney U Test)', fontsize=20, weight='bold')
 
+# add title to figure
+fig.suptitle('Average League Statistics\n2017 vs 1980\n(Mann Whitney U Test)', fontsize=20, weight='bold')
 fig.tight_layout()
+
+# save file
 plt.savefig('stats_2017_v_1980.png')
 
 
@@ -239,7 +255,11 @@ for stat, ax in zip(top_ten_stats[3:], axs.flatten()):
     
     # adds transparent grid
     ax.grid('on', alpha=.3)
+
+# add title to figure
 fig.suptitle('Average Statistics for the Top Ten\nPlayers by decade', fontsize=24, weight='bold')
 fig.tight_layout()
+
+# save file
 plt.savefig('top_ten_stats_by_decade.png')
 
