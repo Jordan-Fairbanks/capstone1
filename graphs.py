@@ -23,6 +23,8 @@ def make_line_graph_from_column(data, column, ax, title=None, xlabel=None, ylabe
                 optional label for the y axis.
             column_dict : dictionary
                 optional dictionary of column names paired with their associated labels (as strings).
+    Returns:
+        None
         
     """
     ax.plot(range(len(df)), df[column])
