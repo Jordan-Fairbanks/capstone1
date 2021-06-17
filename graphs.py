@@ -236,12 +236,11 @@ if __name__ == '__main__':
     plt.savefig('stats_2017_v_1980.png')
 
 
-
     # separates the data by decade
-    eighties = players_and_stats[(players_and_stats.Year < 1990) & (players_and_stats.Year > 1979)]
-    nineties = players_and_stats[(players_and_stats.Year < 2000) & (players_and_stats.Year > 1989)]
-    twenty_oughts = players_and_stats[(players_and_stats.Year < 2010) & (players_and_stats.Year > 1999)]
-    twenty_tens = players_and_stats[(players_and_stats.Year < 2018) & (players_and_stats.Year > 2009)]
+    eighties = season_stats[(season_stats.Year < 1990) & (season_stats.Year > 1979)]
+    nineties = season_stats[(season_stats.Year < 2000) & (season_stats.Year > 1989)]
+    twenty_oughts = season_stats[(season_stats.Year < 2010) & (season_stats.Year > 1999)]
+    twenty_tens = season_stats[(season_stats.Year < 2018) & (season_stats.Year > 2009)]
 
     # extracts the top ten scorers from each decade
     top_ten_eighties = eighties[eighties['PTS'] >= np.percentile(eighties['PTS'].values, 90)][['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
