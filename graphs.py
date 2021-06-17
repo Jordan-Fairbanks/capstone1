@@ -256,23 +256,17 @@ if __name__ == '__main__':
     top_ten_twenty_oughts_stats = [season_stats[(season_stats['Player']==name) &(season_stats.Year < 2010) & (season_stats.Year > 1999)][top_ten_stats] for name in top_ten_twenty_oughts.index]
     top_ten_twenty_tens_stats = [season_stats[(season_stats['Player']==name) &(season_stats.Year < 2018) & (season_stats.Year > 2009)][top_ten_stats] for name in top_ten_twenty_tens.index]
 
-    # calculates the means for each of those players in the respective decade
-    eighties_means = [df.groupby('Player').mean() for df in top_ten_eighties_stats]   
-    nineties_means = [df.groupby('Player').mean() for df in top_ten_nineties_stats]
-    twenty_oughts_means = [df.groupby('Player').mean() for df in top_ten_twenty_oughts_stats]
-    twenty_tens_means = [df.groupby('Player').mean() for df in top_ten_twenty_tens_stats]
-
-    #  concats the lists of means into pandas dataframes 
-    eighties_total = pd.concat(eighties_means)
-    nineties_total = pd.concat(nineties_means)
-    twenty_oughts_total = pd.concat(twenty_oughts_means)
-    twenty_tens_total = pd.concat(twenty_tens_means)
+    # calculates the means for each of those players in the respective decade and creates a dataframe for each decade
+    eighties_means = pd.concat([df.groupby('Player').mean() for df in top_ten_eighties_stats])   
+    nineties_means = pd.concat([df.groupby('Player').mean() for df in top_ten_nineties_stats])
+    twenty_oughts_means = pd.concat([df.groupby('Player').mean() for df in top_ten_twenty_oughts_stats])
+    twenty_tens_means = pd.concat([df.groupby('Player').mean() for df in top_ten_twenty_tens_stats])
 
 
     fig, axs = plt.subplots(2,5, figsize=(20, 12))
     for stat, ax in zip(top_ten_stats[3:], axs.flatten()):
         # get the means of each statistic by decade
-        means = [eighties_total[stat].mean(), nineties_total[stat].mean(),twenty_oughts_total[stat].mean(),    twenty_tens_total[stat].mean()]
+        means = [eighties_means[stat].mean(), nineties_means[stat].mean(),twenty_oughts_means[stat].mean(),    twenty_tens_means[stat].mean()]
     
     # makes basic plot
     ax.plot(range(4), means, linewidth=2, marker='o')
