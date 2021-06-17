@@ -268,22 +268,22 @@ if __name__ == '__main__':
         # get the means of each statistic by decade
         means = [eighties_means[stat].mean(), nineties_means[stat].mean(),twenty_oughts_means[stat].mean(),    twenty_tens_means[stat].mean()]
     
-    # makes basic plot
-    ax.plot(range(4), means, linewidth=2, marker='o')
+        # makes basic plot
+        ax.plot(range(4), means, linewidth=2, marker='o')
     
-    # change the bounds of the y axis to more accurately show the change in relation
-    # to the league maximum and minimum
-    ax.set_ylim(season_stats[stat].min(), season_stats[stat].max()*.85)
+        # change the bounds of the y axis to more accurately show the change in relation
+        # to the league maximum and minimum
+        ax.set_ylim(season_stats[stat].min(), season_stats[stat].max()*.85)
     
-    # adds title and labels
-    ax.set_title(f'{codes[stat]}')
-    ax.set_xlabel('Decade')
-    ax.set_ylabel(f'{codes[stat]}')
-    ax.set_xticks(range(4))
-    ax.set_xticklabels([(str(year) + '\'s') for year in range(1980, 2020, 10)])
+        # adds title and labels
+        ax.set_title(f'{codes[stat]}')
+        ax.set_xlabel('Decade')
+        ax.set_ylabel(f'{codes[stat]}')
+        ax.set_xticks(range(4))
+        ax.set_xticklabels([(str(year) + '\'s') for year in range(1980, 2020, 10)])
     
-    # stylizes the graph
-    add_style(ax,grid=True)
+        # stylizes the graph
+        add_style(ax,grid=True)
 
     # add title to figure
     fig.suptitle('Average Statistics for the Top Ten\nPlayers by decade', fontsize=24, weight='bold')
