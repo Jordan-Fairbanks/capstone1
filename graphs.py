@@ -27,7 +27,7 @@ def make_line_graph_from_column(data, column, ax, title=None, xlabel=None, ylabe
         None
         
     """
-    ax.plot(range(len(df)), df[column])
+    ax.plot(range(len(data)), data[column])
     if column_dict: 
         if title:
             ax.set_title(column_dict[column] + title)
