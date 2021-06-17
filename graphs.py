@@ -33,8 +33,6 @@ def make_line_graph_from_column(data, column, ax, title=None, xlabel=None, ylabe
             ax.set_title(column_dict[column] + title)
         if xlabel:
             ax.set_xlabel(xlabel)
-        else:
-            ax.set_xlabel(column_dict[column]) 
         if ylabel:
             ax.set_ylabel(ylabel)
         else:
