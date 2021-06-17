@@ -245,7 +245,7 @@ if __name__ == '__main__':
 
     # extracts the top ten scorers from each decade
     top_ten_eighties = eighties[eighties['PTS'] >= np.percentile(eighties['PTS'].values, 90)[['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
-    top_ten_nineties = nineties[nineties['PTS'] >= np.percentile(nineties['PTS'].values, 90)][['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
+    top_ten_nineties = nineties[nineties['PTS'] >= np.percentile(nineties['PTS'].values, 90)[['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
     top_ten_twenty_oughts = twenty_oughts[twenty_oughts['PTS'] >= np.percentile(twenty_oughts['PTS'].values, 90)][['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
     top_ten_twenty_tens = twenty_tens[twenty_tens['PTS'] >= np.percentile(twenty_tens['PTS'].values, 90)][['Player','PTS']].groupby('Player').mean('PTS').sort_values(by=['PTS'], inplace=False, ascending=False).head(10)
 
